@@ -24,6 +24,20 @@ socket.on('message',msg=>{
     chatMessages.scrollTop = chatMessages.scrollHeight;
 })
 
+socket.on('chatHistory', (history) => {
+  // Clear existing messages
+  chatMessages.innerHTML = '';
+  
+  // Output each message from history
+  history.forEach(message => {
+      outputMessage(message);
+  });
+  
+  // Scroll to the bottom
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
+
 chatForm.addEventListener('submit',(e)=>{
     e.preventDefault()
     let msg = e.target.elements.msg.value;
