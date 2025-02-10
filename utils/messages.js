@@ -1,12 +1,14 @@
 const moment = require('moment');
+
+require('dotenv').config();
 const mongoose = require('mongoose');
 
-// MongoDB connection
-mongoose.connect('mongodb://localhost:27017/chatcord', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log('MongoDB Connection Error:', err));
 
+  
 // Message Schema
 const messageSchema = new mongoose.Schema({
     room: {

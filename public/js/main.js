@@ -1,4 +1,10 @@
-const socket=io()
+<script src="/socket.io/socket.io.js"></script>
+
+const socket = io('https://chatcord-ten.vercel.app/', {
+  transports: ['websocket'],
+  upgrade: false
+});
+
 const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages')
 const roomName = document.getElementById('room-name');
@@ -7,11 +13,12 @@ const userList = document.getElementById('users');
 const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-
 socket.emit('joinRoom',{username,room})
 
 //get room and users
 socket.on('roomUsers', ({ room, users }) => {
+  console.log('Username:', username);
+  console.log('Room:', room);
     outputRoomName(room);
     outputUsers(users);
   });

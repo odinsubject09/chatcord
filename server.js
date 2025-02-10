@@ -3,6 +3,7 @@ const express=require('express')
 const http = require("http")
 const socketio = require("socket.io");
 const botName = "ChatCord Bot";
+const cors = require('cors');
 const {
     userJoin,
     getCurrentUser,
@@ -18,8 +19,17 @@ const {
 
 
 const app=express()
+app.use(cors());
 const server = http.createServer(app);
-const io = socketio(server);
+
+const io = socketio(server, {
+  cors: {
+      origin: ["https://chatcord-ten.vercel.app", "http://localhost:3000"],  // In production, replace with your specific frontend URL
+      methods: ["GET", "POST"],
+      credentials: true
+  },
+  transports: ['websocket']
+});
 
 
 //Set static folder(public)
