@@ -1,10 +1,4 @@
-<script src="/socket.io/socket.io.js"></script>
-
-const socket = io('https://chatcord-ten.vercel.app/', {
-  transports: ['websocket'],
-  upgrade: false
-});
-
+const socket=io()
 const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages')
 const roomName = document.getElementById('room-name');
